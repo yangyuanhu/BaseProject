@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>登录</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: "微软雅黑"
+        }
+
+        .BGImg {
+            position: absolute;
+            left: 15%;
+            top: 50%;
+            margin-top: -247px;
+        }
+
+        .loginBox {
+            width: 398px;
+            height: 380px;
+            box-shadow: #ccc 0px 0px 30px;
+            background: #fff;
+            position: absolute;
+            right: 15%;
+            top: 50%;
+            margin-top: -190px;
+        }
+
+        .boxTop {
+            width: 250px;
+            height: 38px;
+            line-height: 38px;
+            text-align: center;
+            margin: 30px auto;
+        }
+
+        .boxTop img {
+            width: 40px;
+            height: 38px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .boxTop span {
+            float: left;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .line {
+            width: calc(100% - 48px);
+            height: 45px;
+            margin-left: 24px;
+            border: 1px solid #CDCDCD;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .account {
+            width: 17px;
+            height: 24px;
+            float: left;
+            margin: 10.5px 12px;
+        }
+
+        .line input {
+            width: calc(100% - 41px);
+            float: left;
+            height: 100%;
+            border: none;
+        }
+
+        .pwd {
+            width: 18px;
+            height: 23px;
+            float: left;
+            margin: 11px 11.5px;
+        }
+
+        .loginBtn {
+            width: calc(100% - 48px);
+            height: 50px;
+            margin-left: 24px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            background: #83DD41;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            letter-spacing: 5px;
+        }
+
+        .register {
+            float: left;
+            color: #4A9F5D;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgetPWD {
+            float: right;
+            color: #4A9F5D;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .line2 {
+            width: calc(100% - 48px);
+            height: 45px;
+            margin-left: 24px;
+            border: none;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #ABABAB;
+            line-height: 20px;
+        }
+
+        .bq {
+            position: absolute;
+            bottom: 30px;
+            color: #fff;
+            left: 30px;
+            font-size: 15px;
+        }
+
+        .bq span {
+            margin-left: 15px;
+        }
+
+        .down {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+        }
+
+        .down a {
+            float: left;
+            font-size: 17px;
+            color: #000;
+            margin-right: 55px;
+            text-decoration: none;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="/static/css/alertify.css" >
+    <script type="text/javascript" src="/static/js/jquery.alertify.js"></script>
+    <script type="text/javascript" src="/static/js/layer.js"></script>
+    <script type="text/javascript" src="/static/js/page.js"></script>
+</head>
+
+<body>
+<!--<form action="/login" method="post">-->
+<form>
+   <!-- <div class="down"><a href="#" style="color:#4A90E2;">专用浏览器下载</a><a href="#">打印控件下载</a><a href="#">远程工具下载</a></div>-->
+    <img src="images/loginBG2.png" width="100%" height="100%" style="z-index:-100;position:absolute;left:0;top:0">
+
+    <img src="images/loginImg.png" class="BGImg"/>
+    <div class="loginBox">
+        <div class="boxTop">
+            <img src="images/logo.png"/>
+            <span>锦丰拆迁结算管理平台</span>
+        </div>
+        <div class="line">
+            <img src="images/Account.png" class="account"/>
+            <input placeholder="请输入账号" name="username" id="account"/>
+        </div>
+        <div class="line">
+            <img src="images/pwd.png" class="pwd"/>
+            <input placeholder="请输入密码" type="password" name="password" id="password"/>
+        </div>
+        <button class="loginBtn" type="button" onclick=serverCheck() >登录</button>
+<!--        <div class="line2">-->
+<!--            &lt;!&ndash;<a href="register.html" class="register" id="register">注册账号</a>&ndash;&gt;-->
+<!--            <a href="forgetPWD.html" class="forgetPWD" id="forgetPWD">忘记密码？</a>-->
+<!--        </div>-->
+        <div class="line2">
+            建议使用Chrome浏览器获得最佳体验！或360、搜狗、QQ浏览器的极速模式！
+        </div>
+    </div>
+
+    <div class="bq">
+        copyright @ 2017 <span>版权所有：苏州安景信息科技有限公司</span><span>电话：0512-58282666</span><span>地址：张家港国泰北路1号留学生创业园A栋426</span>
+    </div>
+</form>
+<script type="text/javascript">
+    var clickFlg = 1;
+
+    function serverCheck() {
+        if (clickFlg == 1) {
+            clickFlg = 0;
+            $.ajax({
+                type: "post",
+                url: "/login",
+                data: $("form").serialize(),
+                cache: false,
+                success: function (data) {
+                    console.log(data)
+                    clickFlg = 1;
+                    if ("success" == data.result) {
+                        window.location.href = '/public/index.html';
+                    } else if ("error" == data.result) {
+                        layer.alert(data.errorMessage);
+                    }
+                },
+                error: function (data) {
+                    console.log(data)
+                    clickFlg = 1;
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

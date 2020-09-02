@@ -1,0 +1,31 @@
+logging:
+    level:
+#      com.yyh: debug
+      c.a.c.m.L: debug
+#      org.springframework.boot: debug
+
+
+spring:
+  datasource:
+    username: root
+    password: admin
+    url: jdbc:mysql:///ChaiQIanDB?useSSL=false&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&useServerPrepStmts=true&cachePrepStmts=true&cacheCallableStmts=true&prepStmtCacheSize=250&prepStmtCacheSqlLimit=1024&useConfigs=maxPerformance
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  configuration:
+    #数据库字段 单词下划线连接转换为驼峰命名
+    map-underscore-to-camel-case: true
+
+
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force-response: true
+
+
+
+
+
